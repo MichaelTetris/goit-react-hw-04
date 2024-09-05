@@ -6,10 +6,10 @@ const SearchBar = () => {
       <form className={css.form_block}>
         <input
           className={css.input}
-          type="text"
+          type="search"
           autoComplete="off"
           autoFocus
-          placeholder="Search images and photos"
+          placeholder="Search images and photos..."
         />
         <button type="submit">Search</button>
       </form>
