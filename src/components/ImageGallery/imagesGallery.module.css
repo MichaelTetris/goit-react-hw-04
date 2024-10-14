@@ -3,3 +3,15 @@
   text-decoration: underline;
   
 }
+
+.imageGrid{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}
+
+.imageItem{
+  width: 200px;
+  height: 200px;
+
+}

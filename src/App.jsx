@@ -5,16 +5,14 @@ import SearchBar from "./components/SearchBar/SearchBar";
 import ImagesList from "./components/ImageGallery/ImageGallery";
 
 const api_url = "https://api.unsplash.com/search/photos";
-const IMAGES_PER_PAGE = 20;
+const IMAGES_PER_PAGE = 16;
 
 function App() {
   /* console.log("key", import.meta.env.VITE_API_KEY); */
 
-  /* const [searchTerm, setSearchTerm] = useState(""); */
   const [images, setImages] = useState([]);
 
   const handleSubmit = async (searchTerm) => {
-    console.log(searchTerm)
     try {
       const response = await axios.get(`${api_url}`, {
         params: {
@@ -24,7 +22,7 @@ function App() {
         },
       });
       setImages(response.data.results);
-      console.log(images);
+      console.log(response);
     } catch (error) {
       console.error("Error fetching data from Unsplash", error);
     }
@@ -33,7 +31,7 @@ function App() {
   return (
     <div className="div_head">
       <SearchBar onClick={handleSubmit} />
-      <ImagesList images={images} />
+      {images.length > 0 && <ImagesList images={images} />}
     </div>
   );
 }
