@@ -4,6 +4,7 @@ import "./App.css";
 import SearchBar from "./components/SearchBar/SearchBar";
 import ImagesList from "./components/ImageGallery/ImageGallery";
 import Loader from "./components/Loader/loader";
+import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 
 const api_url = "https://api.unsplash.com/search/photos";
 const IMAGES_PER_PAGE = 16;
@@ -13,9 +14,11 @@ function App() {
 
   const [images, setImages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   const handleSubmit = async (searchTerm) => {
     setIsLoading(true);
+    setError(false);
     try {
       const response = await axios.get(`${api_url}`, {
         params: {
@@ -28,6 +31,7 @@ function App() {
       console.log(response);
     } catch (error) {
       console.error("Error fetching data from Unsplash", error);
+      setError(true);
     } finally {
       setIsLoading(false);
     }
@@ -36,7 +40,9 @@ function App() {
   return (
     <div className="div_head">
       <SearchBar onClick={handleSubmit} />
-      {isLoading ? <Loader /> : images.length > 0 && <ImagesList images={images} />}
+      {isLoading && <Loader />}
+      {!isLoading && error && <ErrorMessage />}
+      {!isLoading && !error && images.length > 0 && <ImagesList images={images} />}
     </div>
   );
 }
