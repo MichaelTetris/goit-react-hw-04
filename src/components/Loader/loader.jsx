@@ -1,11 +1,12 @@
 import { Blocks } from "react-loader-spinner";
+import css from "./loader.module.css"
 
 const Loader = () => {
   return (
-    <div>
+    <div className= {css.loaderContainer}>
       <Blocks
-        height="80"
-        width="80"
+        height="60"
+        width="60"
         color="#4fa94d"
         ariaLabel="blocks-loading"
         wrapperStyle={{}}
